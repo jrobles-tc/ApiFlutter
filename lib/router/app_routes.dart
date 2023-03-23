@@ -16,13 +16,13 @@ class AppRoutes{
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes(){ 
 
-    Map<String, Widget Function(BuildContext)> AppRoutes = {};
+    Map<String, Widget Function(BuildContext)> appRoutes = {};
 
     for(final option in menuOptions) {
-      AppRoutes.addAll({ option.route: (BuildContext context) => option.screen });
+      appRoutes.addAll({ option.route: (BuildContext context) => option.screen });
     }
     
-    return AppRoutes;
+    return appRoutes;
   }
 
   //static Map<String, Widget Function(BuildContext)> routes = {
