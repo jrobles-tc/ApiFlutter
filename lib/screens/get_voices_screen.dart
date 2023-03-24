@@ -92,41 +92,6 @@ class _GetVoicesState extends State<GetVoices> {
                     },
                     
                 ),
-
-                ElevatedButton(
-                    child: const Padding(
-                      padding:  EdgeInsets.symmetric( horizontal: 20, vertical: 10),
-                      child:  Text("GET Languages", style: TextStyle(fontSize: 20)),
-                    ),
-
-                    onPressed:() async {
-
-                      // Debe ser async el boton {
-                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6');
-
-                      final List<Voices> voices = await api.getVoices(laguageCode: "en-US");
-
-                      // for(int i=0; i<voices.length; i++ ){
-                      //   print("Voice #$i\n"
-                      //   "Language Code: ${voices[i].languageCode}\n"
-                      //   "Language Name: ${voices[i].languageName}\n"
-                      //   "Voice Type: ${voices[i].voiceType}\n"
-                      //   "Voice Code: ${voices[i].voiceCode}\n"
-                      //   "Voice Gender: ${voices[i].voiceGender}\n");
-
-                      //   textResponse= textResponse+"Voice #$i\n"
-                      //   "Language Code: ${voices[i].languageCode}\n"
-                      //   "Language Name: ${voices[i].languageName}\n"
-                      //   "Voice Type: ${voices[i].voiceType}\n"
-                      //   "Voice Code: ${voices[i].voiceCode}\n"
-                      //   "Voice Gender: ${voices[i].voiceGender}\n\n";
-                        
-                      // }
-                      
-                      setState(() {});     
-                    },
-                    
-                ),
                 
                 const SizedBox(height: 30),
 

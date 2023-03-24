@@ -1,8 +1,8 @@
-import "package:api_flutter_app/model/languages.dart";
+import "package:api_flutter_app/model/synthesizes.dart";
 import "package:dio/dio.dart";
 
-class GetLanguagesApi {
-  GetLanguagesApi({
+class PostSynthesizeApi {
+  PostSynthesizeApi({
     required this.baseUrl,
     required this.apiKey,
     this.rapidApiHost = 'cloudlabs-text-to-speech.p.rapidapi.com',
@@ -16,6 +16,7 @@ class GetLanguagesApi {
             "content-type": "application/x-www-form-urlencoded",
             'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': rapidApiHost,
+            'useQueryString': true
           },
         ));
 
@@ -27,22 +28,29 @@ class GetLanguagesApi {
   final String apiKey;
 
 
-  //estancia de laguges se necesita primero
-  Future<List<Languages>> getLanguages() async {
 
-    const String path = "/languages";
-    final List<Languages> result = [];
-    final response = await dio.get(path);   
+  Future<Audio?> postSynthesize({required String languageCode, required String text}) async {
+
+    const String path = "/synthesize";
+
+    Audio? audioResponse;
+
+
+    Map<String, dynamic> params = {"voice_code": languageCode, "text": text, "speed":  "1.00", "pitch": "1.00", "output_type": "audio_url"};
+
+    final response = await dio.post(path, data: params);   
 
 
     if (response.data != null) {
-      final languages = response.data["languages"];
-      for (Map<String, dynamic> language in languages) {
-        result.add(languagesFromJson(language));
-      }
+      final audios = response.data["result"];
+
+        audioResponse = Audio.fromJson(audios!);
+      
     }
 
-    return result;
+
+  return audioResponse;
+  
   }
 
  
