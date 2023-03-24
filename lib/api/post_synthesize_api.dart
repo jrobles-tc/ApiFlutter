@@ -44,7 +44,7 @@ class PostSynthesizeApi {
     if (response.data != null) {
       final audios = response.data["result"];
 
-        audioResponse = Audio.fromJson(audios!);
+        audioResponse = Audio.fromJson(audios);
       
     }
 
