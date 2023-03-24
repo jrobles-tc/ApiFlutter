@@ -1,18 +1,23 @@
-import 'package:api_flutter_app/widgets/custom_card_type1.dart';
+
+import 'package:api_flutter_app/api/get_voices_api.dart';
 import 'package:flutter/material.dart';
 
-import '../api/text_voice_api.dart';
 import '../model/voices.dart';
 import '../theme/app_theme.dart';
 
-String textResponse =  "Aqui aparecera la respuesta generada por el metodo GET de la API" ;
+String textResponse =  "" ;
 
-class GetVoices extends StatelessWidget {
+
+class GetVoices extends StatefulWidget {
 
 
   const GetVoices({Key? key}) : super(key: key);
 
+  @override
+  State<GetVoices> createState() => _GetVoicesState();
+}
 
+class _GetVoicesState extends State<GetVoices> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +31,7 @@ class GetVoices extends StatelessWidget {
             child: Column(
               children: [
 
-                const Center (child: Text("Bienvenido al endpoint GET voices", style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 243, 219, 0)))),
+                const Center (child: Text("Bienvenido al endpoint GET voices", style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 26, 20, 121), ))),
                 const SizedBox(height: 30),
                 const Text("para comenzar puedes realizar la consulta o bien, poner una opcion como párametro"),
                 const SizedBox(height: 20),
@@ -58,50 +63,39 @@ class GetVoices extends StatelessWidget {
                     onPressed:() async {
 
                       // Debe ser async el boton {
-                      TextVoiceApi api = TextVoiceApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6');
+                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6');
 
                       final List<Voices> voices = await api.getVoices();
 
                       for(int i=0; i<voices.length; i++ ){
-                        print(voices[i].languageCode );
-                      }
-                  
-                      
+                        print("Voice #$i\n"
+                        "Language Code: ${voices[i].languageCode}\n"
+                        "Language Name: ${voices[i].languageName}\n"
+                        "Voice Type: ${voices[i].voiceType}\n"
+                        "Voice Code: ${voices[i].voiceCode}\n"
+                        "Voice Gender: ${voices[i].voiceGender}\n");
 
-                      textResponse = voices[0].languageCode;
-                           
+                        textResponse= textResponse+"Voice #$i\n"
+                        "Language Code: ${voices[i].languageCode}\n"
+                        "Language Name: ${voices[i].languageName}\n"
+                        "Voice Type: ${voices[i].voiceType}\n"
+                        "Voice Code: ${voices[i].voiceCode}\n"
+                        "Voice Gender: ${voices[i].voiceGender}\n\n";
+
+                        
+                        
+                        
+                      }
+
+                      
+                      setState(() {});     
                     },
                     
                 ),
                 
                 const SizedBox(height: 30),
 
-                Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: const Icon(Icons.api_outlined, color: AppTheme.primary),
-                        title: const Text("Response: ", style: TextStyle(color: AppTheme.primary, fontSize: 21)), 
-                        subtitle: Text(textResponse , style: const TextStyle(color: Colors.grey)),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            
-                            TextButton(
-                              onPressed: () {}, 
-                              child: const Text("Reset")
-                            )
-                          ],
-                        ),
-                      )
-
-                    ],
-                  )
-                )
+                CardResponse()
 
               ],
             )
@@ -113,5 +107,41 @@ class GetVoices extends StatelessWidget {
     );
   
   }
-  
+}
+
+class CardResponse extends StatelessWidget {
+  const CardResponse({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.api_outlined, color: AppTheme.primary),
+            title: const Text("Response: ", style: TextStyle(color: AppTheme.primary, fontSize: 21)), 
+            subtitle: Text(textResponse ),
+            
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                
+                TextButton(
+                  onPressed: () {}, 
+                  child: const Text("Reset")
+                )
+              ],
+            ),
+          )
+
+        ],
+      )
+    );
+  }
 }

@@ -1,8 +1,8 @@
 import "package:api_flutter_app/model/voices.dart";
 import "package:dio/dio.dart";
 
-class TextVoiceApi {
-  TextVoiceApi({
+class GetVoicesApi {
+  GetVoicesApi({
     required this.baseUrl,
     required this.apiKey,
     this.rapidApiHost = 'cloudlabs-text-to-speech.p.rapidapi.com',
@@ -32,7 +32,7 @@ class TextVoiceApi {
 
     const String path = "/voices";
     final List<Voices> result = [];
-    final response = await dio.get(path, queryParameters: param);   //optional param
+    final response = await dio.get(path, queryParameters: param);   
 
 
     if (response.data != null) {
