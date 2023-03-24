@@ -29,11 +29,11 @@ class PostSynthesizeApi {
 
 
 
-  Future<Audio?> postSynthesize({required String languageCode, required String text}) async {
+  Future<Audio> postSynthesize({required String languageCode, required String text}) async {
 
     const String path = "/synthesize";
 
-    Audio? audioResponse;
+    Audio audioResponse;
 
 
     Map<String, dynamic> params = {"voice_code": languageCode, "text": text, "speed":  "1.00", "pitch": "1.00", "output_type": "audio_url"};
@@ -41,12 +41,11 @@ class PostSynthesizeApi {
     final response = await dio.post(path, data: params);   
 
 
-    if (response.data != null) {
-      final audios = response.data["result"];
 
-        audioResponse = Audio.fromJson(audios);
+    final audio = response.data["result"];
+
+    audioResponse = Audio.fromJson(audio);
       
-    }
 
 
   return audioResponse;
