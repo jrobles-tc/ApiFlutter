@@ -1,4 +1,3 @@
-
 import 'package:api_flutter_app/api/get_voices_api.dart';
 import 'package:flutter/material.dart';
 
@@ -8,16 +7,16 @@ import '../theme/app_theme.dart';
 String textResponse =  "" ;
 
 
-class GetVoices extends StatefulWidget {
+class GetLanguages extends StatefulWidget {
 
 
-  const GetVoices({Key? key}) : super(key: key);
+  const GetLanguages({Key? key}) : super(key: key);
 
   @override
-  State<GetVoices> createState() => _GetVoicesState();
+  State<GetLanguages> createState() => _GetLanguagesState();
 }
 
-class _GetVoicesState extends State<GetVoices> {
+class _GetLanguagesState extends State<GetLanguages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +56,7 @@ class _GetVoicesState extends State<GetVoices> {
                 ElevatedButton(
                     child: const Padding(
                       padding:  EdgeInsets.symmetric( horizontal: 20, vertical: 10),
-                      child:  Text("GET Voices", style: TextStyle(fontSize: 20)),
+                      child:  Text("GET", style: TextStyle(fontSize: 20)),
                     ),
 
                     onPressed:() async {
@@ -87,41 +86,6 @@ class _GetVoicesState extends State<GetVoices> {
                         
                       }
 
-                      
-                      setState(() {});     
-                    },
-                    
-                ),
-
-                ElevatedButton(
-                    child: const Padding(
-                      padding:  EdgeInsets.symmetric( horizontal: 20, vertical: 10),
-                      child:  Text("GET Languages", style: TextStyle(fontSize: 20)),
-                    ),
-
-                    onPressed:() async {
-
-                      // Debe ser async el boton {
-                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6');
-
-                      final List<Voices> voices = await api.getVoices(laguageCode: "en-US");
-
-                      // for(int i=0; i<voices.length; i++ ){
-                      //   print("Voice #$i\n"
-                      //   "Language Code: ${voices[i].languageCode}\n"
-                      //   "Language Name: ${voices[i].languageName}\n"
-                      //   "Voice Type: ${voices[i].voiceType}\n"
-                      //   "Voice Code: ${voices[i].voiceCode}\n"
-                      //   "Voice Gender: ${voices[i].voiceGender}\n");
-
-                      //   textResponse= textResponse+"Voice #$i\n"
-                      //   "Language Code: ${voices[i].languageCode}\n"
-                      //   "Language Name: ${voices[i].languageName}\n"
-                      //   "Voice Type: ${voices[i].voiceType}\n"
-                      //   "Voice Code: ${voices[i].voiceCode}\n"
-                      //   "Voice Gender: ${voices[i].voiceGender}\n\n";
-                        
-                      // }
                       
                       setState(() {});     
                     },

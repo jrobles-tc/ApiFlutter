@@ -1,8 +1,9 @@
-import "package:api_flutter_app/model/voices.dart";
+import "package:api_flutter_app/model/languages.dart";
+import "package:api_flutter_app/screens/get_languages_screen.dart";
 import "package:dio/dio.dart";
 
-class GetVoicesApi {
-  GetVoicesApi({
+class GetLanguagesApi {
+  GetLanguagesApi({
     required this.baseUrl,
     required this.apiKey,
     this.rapidApiHost = 'cloudlabs-text-to-speech.p.rapidapi.com',
@@ -26,19 +27,19 @@ class GetVoicesApi {
   final Duration receiveTimeout;
   final String apiKey;
 
-  Future<List<Voices>> getVoices({String? laguageCode}) async {
 
-    Map<String, dynamic> param = {"language_code": laguageCode}; //optional param
+  //estancia de laguges se necesita primero
+  Future<List<Languages>> getLanguages({String? laguageCode}) async {
 
-    const String path = "/voices";
-    final List<Voices> result = [];
-    final response = await dio.get(path, queryParameters: param);   
+    const String path = "/languages";
+    final List<Languages> result = [];
+    final response = await dio.get(path);   
 
 
     if (response.data != null) {
-      final voices = response.data["voices"];
-      for (Map<String, dynamic> voice in voices) {
-        result.add(voicesFromJson(voice));
+      final languages = response.data["languages"];
+      for (Map<String, dynamic> language in languages) {
+        result.add(languagesFromJson(language));
       }
     }
 
@@ -49,4 +50,4 @@ class GetVoicesApi {
 }
 
 
-//key: 7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6
+

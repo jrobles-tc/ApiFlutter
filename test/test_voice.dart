@@ -11,7 +11,7 @@ void main() {
       baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6'));
 
   test('Get voices', () async {
-    final List<Voices> voices = await api.getVoices(code: "zh-TW");
+    final List<Voices> voices = await api.getVoices(laguageCode: "en-US");
 
     for (Voices voice in voices) {
         print(voice.languageCode);
