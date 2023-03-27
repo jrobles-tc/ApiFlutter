@@ -1,4 +1,5 @@
 import 'package:api_flutter_app/api/post_synthesize_api.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 import '../model/synthesizes.dart';
@@ -20,6 +21,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
 
   final languageCodeUserS= TextEditingController();
   final textTraductor= TextEditingController();
+  final playerSoundSlap = AudioPlayer();
 
 
   @override
@@ -57,7 +59,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                 ),
 
                 TextFormField(
-                  
+                  controller: textTraductor,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.only(
@@ -97,7 +99,11 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                 
                 const SizedBox(height: 30),
 
-                CardResponse()
+                CardResponse(),
+
+                const SizedBox(height: 30),
+
+
 
               ],
             )

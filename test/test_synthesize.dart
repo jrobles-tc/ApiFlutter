@@ -7,10 +7,10 @@ void main() {
   late final PostSynthesizeApi api;
   
   setUpAll(() => api = PostSynthesizeApi(
-      baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '12b36e4bcbmsh97e8aa65b2005e3p10e8c0jsna8315a8b970f'));
+      baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '71b10a6f98mshdc9ece279ddb673p1497fcjsn126ff054cc69'));
 
   test('Post Synthesize', () async {
-    final Audio audios = await api.postSynthesize(languageCode: "es-ES-1", text: "Hola Cómo estas?, hoy hay lluvia creo, prueba 1");
+    final Audio audios = await api.postSynthesize(languageCode: "es-ES-1", text: "Hola Cómo estas?, prueba 1");
 
 
     print(audios.audioUrl);

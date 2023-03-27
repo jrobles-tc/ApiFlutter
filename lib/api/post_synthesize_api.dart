@@ -41,8 +41,10 @@ class PostSynthesizeApi {
     final response = await dio.post(path, data: params);   
 
 
-
+    print(response);
     final audio = response.data["result"];
+
+    print(audio);
 
     audioResponse = Audio.fromJson(audio);
       

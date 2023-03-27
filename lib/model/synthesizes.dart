@@ -5,6 +5,7 @@ Audio synthesizesFromJson(Map<String, dynamic> str) => Audio.fromJson(str);
 String synthesizesToJson(Audio data) => json.encode(data.toJson());
 
 class Audio{
+  
     Audio({
         required this.audioUrl,
     });
