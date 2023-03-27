@@ -68,7 +68,7 @@ class _GetVoicesState extends State<GetVoices> {
                     onPressed:() async {
 
                       // Debe ser async el boton {
-                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '71b10a6f98mshdc9ece279ddb673p1497fcjsn126ff054cc69');
+                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: 'e8a014fa78msh8ad297f66e6d143p1b2790jsncfa2181d037b');
 
           
                       final List<Voices> voices = await api.getVoices(laguageCode: LanguageCodeUser.text);

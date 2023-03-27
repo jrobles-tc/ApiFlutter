@@ -1,12 +1,11 @@
 import 'package:api_flutter_app/api/post_synthesize_api.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../model/synthesizes.dart';
 import '../theme/app_theme.dart';
 
 String textResponse =  "" ;
-
 
 class PostSynthesize extends StatefulWidget {
 
@@ -21,8 +20,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
 
   final languageCodeUserS= TextEditingController();
   final textTraductor= TextEditingController();
-  final playerSoundSlap = AudioPlayer();
-
+  
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +83,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                     onPressed:() async {
 
                       // Debe ser async el boton {
-                      PostSynthesizeApi api = PostSynthesizeApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '71b10a6f98mshdc9ece279ddb673p1497fcjsn126ff054cc69');
+                      PostSynthesizeApi api = PostSynthesizeApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: 'e8a014fa78msh8ad297f66e6d143p1b2790jsncfa2181d037b');
 
                       final Audio audio = await api.postSynthesize(languageCode: languageCodeUserS.text, text: textTraductor.text);
 
@@ -103,7 +101,14 @@ class _GetSynthesizeState extends State<PostSynthesize> {
 
                 const SizedBox(height: 30),
 
-
+                ElevatedButton(
+                  
+                  onPressed: () {
+                    launchUrlString(textResponse);
+                    setState(() { });
+                  }, 
+                  child: const Text("Reproducir en el navegador")
+                )
 
               ],
             )
@@ -161,3 +166,13 @@ class _CardResponseState extends State<CardResponse> {
     );
   }
 }
+
+
+void _launchURL() async {
+    const url = 'https://flutter.io';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'No se pudo abrir la URL $url';
+    }
+  }
