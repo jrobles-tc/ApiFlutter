@@ -17,6 +17,11 @@ class PostSynthesize extends StatefulWidget {
 }
 
 class _GetSynthesizeState extends State<PostSynthesize> {
+
+  final languageCodeUserS= TextEditingController();
+  final textTraductor= TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +37,11 @@ class _GetSynthesizeState extends State<PostSynthesize> {
 
                 const Center (child: Text("Bienvenido al endpoint POST voces", style: TextStyle(fontSize: 22, color: Color.fromARGB(255, 26, 20, 121), ))),
                 const SizedBox(height: 30),
-                const Text("para comenzar escribe una frase y el lenguaje en que deseas escucharlo!"),
+                const Text("para comenzar escribe una frase y el lenguaje en que deseas escucharlo!, por defecto puedes colocar laguage code: es-ES-1 "),
                 const SizedBox(height: 20),
 
                 TextFormField(
+                  controller: languageCodeUserS,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.only(
@@ -51,6 +57,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                 ),
 
                 TextFormField(
+                  
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.only(
@@ -61,6 +68,7 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                       contentPadding: EdgeInsets.all(20),
                       fillColor: Colors.deepPurpleAccent,
                       hintText: "text: REQUIRED",
+    
                       hintStyle: TextStyle(color: Colors.grey)),
                 ),
 
@@ -75,14 +83,12 @@ class _GetSynthesizeState extends State<PostSynthesize> {
                     onPressed:() async {
 
                       // Debe ser async el boton {
-                      PostSynthesizeApi api = PostSynthesizeApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '12b36e4bcbmsh97e8aa65b2005e3p10e8c0jsna8315a8b970f');
+                      PostSynthesizeApi api = PostSynthesizeApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '71b10a6f98mshdc9ece279ddb673p1497fcjsn126ff054cc69');
 
-                      final Audio audio = await api.postSynthesize(languageCode: "es-ES-1", text: "Hola Cómo estas?, hoy hay lluvia creo, prueba 1");
+                      final Audio audio = await api.postSynthesize(languageCode: languageCodeUserS.text, text: textTraductor.text);
 
                       print(audio.audioUrl);
                       textResponse = audio.audioUrl;
-
- 
                       
                       setState(() {});     
                     },

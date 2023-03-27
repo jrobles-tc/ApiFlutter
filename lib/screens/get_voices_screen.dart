@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../model/voices.dart';
 import '../theme/app_theme.dart';
+import '../widgets/widgets.dart';
 
 String textResponse =  "" ;
 
@@ -18,6 +19,9 @@ class GetVoices extends StatefulWidget {
 }
 
 class _GetVoicesState extends State<GetVoices> {
+
+  final LanguageCodeUser= TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +41,7 @@ class _GetVoicesState extends State<GetVoices> {
                 const SizedBox(height: 20),
 
                 TextFormField(
+                  controller: LanguageCodeUser,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.only(
@@ -63,9 +68,11 @@ class _GetVoicesState extends State<GetVoices> {
                     onPressed:() async {
 
                       // Debe ser async el boton {
-                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '7fc4dc9e81msh8d1b5a3ada41d4fp16abc9jsn576adf76dbf6');
+                      GetVoicesApi api = GetVoicesApi(baseUrl: 'https://cloudlabs-text-to-speech.p.rapidapi.com', apiKey: '71b10a6f98mshdc9ece279ddb673p1497fcjsn126ff054cc69');
 
-                      final List<Voices> voices = await api.getVoices(laguageCode: "en-US");
+          
+                      final List<Voices> voices = await api.getVoices(laguageCode: LanguageCodeUser.text);
+
 
                       for(int i=0; i<voices.length; i++ ){
                         print("Voice #$i\n"
@@ -95,7 +102,28 @@ class _GetVoicesState extends State<GetVoices> {
                 
                 const SizedBox(height: 30),
 
-                CardResponse()
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    height: 300,
+                    width: double.infinity,
+                    child: SingleChildScrollView(
+                      child: CardResponse()
+                      ),
+                    ),
+                  ),
+                
+
+                const SizedBox(height: 30,),
+
+                ElevatedButton(
+                  
+                  onPressed: () {
+                    textResponse= "";
+                    setState(() { });
+                  }, 
+                  child: const Text("Reset")
+                )
 
               ],
             )
@@ -135,16 +163,6 @@ class _CardResponseState extends State<CardResponse> {
             padding: const EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                
-                TextButton(
-                  onPressed: () {
-                    textResponse= "";
-                    setState(() { });
-                  }, 
-                  child: const Text("Reset")
-                )
-              ],
             ),
           )
 
